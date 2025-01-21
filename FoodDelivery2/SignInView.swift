@@ -15,7 +15,7 @@ struct SignInView: View {
                     
                     
                     
-                    Text("Get your groceries \nwith nectar")
+                    Text("Get your grocerie \nwith nectar")
                         .font(.customfont(.semibold, fontSize: 26))
                         .foregroundColor(.black)
                         .multilineTextAlignment(.leading)
