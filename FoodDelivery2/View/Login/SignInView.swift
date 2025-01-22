@@ -26,8 +26,9 @@ struct SignInView: View {
                         .frame(height: 1)
                         .foregroundColor(.gray.opacity(0.3))
                         .padding(.horizontal, 30)
-                        .padding(.top, 150)
+                        .padding(.top, 60)
                 }
+                
                 Spacer()
                 HStack{
                     NavigationLink{
@@ -42,24 +43,24 @@ struct SignInView: View {
                             .cornerRadius(20)
                     }
                     .padding(.horizontal, 1)
-                    .padding(.top, 350)
+                    .padding(.top, 280)
                     
                 }
                 NavigationLink{
-                    
+                    SingUpView()
                 } label: {
-                    Text("Continue with SignIn")
+                    Text("Continue with SignUp")
                         .font(.customfont(.semibold, fontSize: 18))
                         .foregroundColor(.black)
                         .multilineTextAlignment(.center)
                         .frame( minWidth: 0, maxWidth: .infinity, minHeight: 60, maxHeight: 50 )
-                        .background(Color(hex: "5383EC"))
+                        .background(Color(hex: "53B175"))
                         .cornerRadius(20)
                 }
-                .padding(.top, 500)
+                .padding(.top, 430)
                 Divider()
                     .frame(width: 350)
-                    .padding(.top, 580)
+                    .padding(.top, 530)
                 
                 VStack{
                     Text("Or connect with social media")
@@ -69,7 +70,7 @@ struct SignInView: View {
                         .padding(.top,30)
                         .padding(.bottom,15)
                 }
-                .padding(.top,650)
+                .padding(.top,570)
                 HStack{
                     
                     Image("google")
@@ -78,16 +79,16 @@ struct SignInView: View {
                         .frame(width: 40,height:40)
                         .padding(.trailing,130)
                 }
-                        .padding(.top,760)
+                        .padding(.top,680)
                 HStack{
                     
                     Image("facebook")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 40,height:40)
-                        .padding(.leading,15)
+                        .padding(.leading,2)
 
-                }       .padding(.top,760)
+                }       .padding(.top,680)
 
                 
                 
@@ -95,8 +96,8 @@ struct SignInView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40,height:40)
-                    .padding(.leading,140)
-                    .padding(.top,757)
+                    .padding(.leading,120)
+                    .padding(.top,680)
                     
 
             }
