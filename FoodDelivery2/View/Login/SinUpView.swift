@@ -10,7 +10,7 @@ struct SingUpView: View {
             Image("bottom_bg")
                 .resizable()
                 .scaledToFill()
-                .frame(width: .screenWidth, height: .screenHeight)  // Use .screenHeight for proper height
+                .frame(width: .screenWidth, height: .screenHeight)
                 .ignoresSafeArea()
 
             VStack {
@@ -21,37 +21,53 @@ struct SingUpView: View {
                     .frame(width: 45, height: 45)
                     .padding(.top, 50)
 
-                Spacer()
+                Spacer(minLength: 20)
 
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 10) {
                     // Title
                     Text("Sign Up")
                         .foregroundColor(.black)
                         .font(.customfont(.semibold, fontSize: 35))
-                        .padding(.bottom, 10)
 
                     // Subtitle
                     Text("Enter your credentials to continue")
                         .foregroundColor(.secondaryText)
                         .font(.customfont(.semibold, fontSize: 16))
-                        .padding(.bottom, 40)
                 }
                 .padding(.horizontal, 20)
+                Spacer(minLength: 30)
 
                 // Username TextField
-                LineTextField(title: "Username", placholder: "Enter your username", txt: $mainVM.txtUsername)
-                    .padding(.bottom, 20)
+                LineTextField(
+                    title: "Username",
+                    placholder: "Enter your username",
+                    txt: $mainVM.txtUsername
+                )
+                .padding(.horizontal, 20)
+                .padding(.bottom, 20)
 
                 // Email TextField
-                LineTextField(title: "Email", placholder: "Enter your email address", txt: $mainVM.txtEmail, keyboardType: .emailAddress)
-                    .padding(.bottom, 20)
+                LineTextField(
+                    title: "Email",
+                    placholder: "Enter your email address",
+                    txt: $mainVM.txtEmail,
+                    keyboardType: .emailAddress
+                )
+                .padding(.horizontal, 20)
+                .padding(.bottom, 20)
 
                 // Password SecureField
-                LineSecureField(title: "Password", placholder: "Enter your password", txt: $mainVM.txtPassword, isShowPassword: $mainVM.isShowPassword)
-                    .padding(.bottom, 20)
+                LineSecureField(
+                    title: "Password",
+                    placholder: "Enter your password",
+                    txt: $mainVM.txtPassword,
+                    isShowPassword: $mainVM.isShowPassword
+                )
+                .padding(.horizontal, 20)
+                .padding(.bottom, 20)
 
                 // Terms and Privacy
-                VStack {
+                VStack(spacing: 8) {
                     HStack {
                         Text("By continuing, you agree to our")
                             .foregroundColor(.secondaryText)
@@ -78,6 +94,7 @@ struct SingUpView: View {
                             }
                     }
                 }
+                .padding(.horizontal, 20)
                 .padding(.bottom, 30)
 
                 // Get Started Button
@@ -93,8 +110,16 @@ struct SingUpView: View {
                         .padding(.horizontal, 20)
                 }
                 .padding(.bottom, 40)
+
+                // This Spacer ensures that the button stays in the bottom section of the screen, not pushed too far down
+                Spacer()
             }
             .padding(.top, 30)
+            
+            
+            .alert(isPresented: $mainVM.showError, content: {
+                   Alert(title: Text(Globs.AppName), message: Text(mainVM.errorMessage) , dismissButton: .default(Text("Ok")))
+               })
         }
         .navigationBarHidden(true)
         .navigationTitle("")
@@ -105,4 +130,3 @@ struct SingUpView: View {
 #Preview {
     SingUpView()
 }
-

@@ -32,7 +32,7 @@ struct SignInView: View {
                 Spacer()
                 HStack{
                     NavigationLink{
-                        
+                        LoginView()
                     } label: {
                         Text("Continue with SignIn")
                             .font(.customfont(.semibold, fontSize: 18))
