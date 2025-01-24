@@ -27,14 +27,15 @@ struct SingUpView: View {
                     // Title
                     Text("Sign Up")
                         .foregroundColor(.black)
-                        .font(.customfont(.semibold, fontSize: 35))
+                        .font(.customfont(.semibold, fontSize: 25))
 
                     // Subtitle
                     Text("Enter your credentials to continue")
                         .foregroundColor(.secondaryText)
                         .font(.customfont(.semibold, fontSize: 16))
                 }
-                .padding(.horizontal, 20)
+                .padding(.horizontal, 10)
+                .padding(.trailing,110)
                 Spacer(minLength: 30)
 
                 // Username TextField
@@ -67,7 +68,7 @@ struct SingUpView: View {
                 .padding(.bottom, 20)
 
                 // Terms and Privacy
-                VStack(spacing: 8) {
+                VStack(spacing: 5) {
                     HStack {
                         Text("By continuing, you agree to our")
                             .foregroundColor(.secondaryText)
@@ -95,7 +96,7 @@ struct SingUpView: View {
                     }
                 }
                 .padding(.horizontal, 20)
-                .padding(.bottom, 30)
+                .padding(.bottom, 15)
 
                 // Get Started Button
                 Button(action: {
@@ -116,11 +117,22 @@ struct SingUpView: View {
             }
             .padding(.top, 30)
             
+                     VStack {
+                         HStack {
+                             BackButton {
+                                 SignInView()
+                             }
+                             Spacer()
+                         }
+                         Spacer()
+                     }
+                     .padding(.top, 60)
+                     .padding(.horizontal, 20)
+                 }
+                 
+               
             
-            .alert(isPresented: $mainVM.showError, content: {
-                   Alert(title: Text(Globs.AppName), message: Text(mainVM.errorMessage) , dismissButton: .default(Text("Ok")))
-               })
-        }
+               
         .navigationBarHidden(true)
         .navigationTitle("")
         .navigationBarBackButtonHidden(true)

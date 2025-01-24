@@ -16,20 +16,24 @@ struct LoginView: View {
                 
                 VStack {
                     // Logo Image
-                    Image("color_logo")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 50, height: 50)
-                        .padding(.top, 120)
+                    HStack {
+                        Spacer() // Center the logo horizontally
+                        Image("color_logo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 50, height: 50) // Adjust size as needed
+                        Spacer() // Center the logo horizontally
+                    }
+                    .padding(.top, 60) // Padding from top to keep the logo at the top
                     
-                    Spacer(minLength: 20)
+                    Spacer(minLength: 40) // Adds space between the logo and next content
                     
                     // Main Content VStack
                     VStack(alignment: .leading, spacing: 15) {
                         // Title
                         Text("Login")
                             .foregroundColor(.black)
-                            .font(.customfont(.semibold, fontSize: 35))
+                            .font(.customfont(.semibold, fontSize: 30))
                         
                         // Subtitle
                         Text("Enter your credentials to continue")
@@ -44,8 +48,8 @@ struct LoginView: View {
                             keyboardType: .emailAddress
                         )
                         .padding(.horizontal, 20)
-                        .padding(.bottom, 20)
-                        
+                        .padding(.top, 20)
+                      
                         // Password SecureField
                         LineSecureField(
                             title: "Password",
@@ -54,17 +58,20 @@ struct LoginView: View {
                             isShowPassword: $mainVM.isShowPassword
                         )
                         .padding(.horizontal, 20)
-                        .padding(.bottom, 30)
+                        .padding(.top,20)
+                      
                         
                         // Forgot Password Link
-                        Button {
-                            // Handle forgot password action
-                        } label: {
-                            Text("Forgot Password?")
-                                .font(.customfont(.medium, fontSize: 14))
-                                .foregroundColor(.primaryText)
+                        HStack {
+                            Spacer()
+                            Button {
+                                // Handle forgot password action
+                            } label: {
+                                Text("Forgot Password?")
+                                    .font(.customfont(.medium, fontSize: 14))
+                                    .foregroundColor(.primaryText)
+                            }
                         }
-                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
                         .padding(.bottom, 25)
                         
                         // Login Button
@@ -97,7 +104,7 @@ struct LoginView: View {
                         .padding(.top, 20)
                     }
                     .padding(.horizontal, 20)
-                    .padding(.bottom, 160)
+                    .padding(.bottom, 80)
                     
                     Spacer() // Push content up if there's extra space
                 }
@@ -118,6 +125,7 @@ struct SignUpView: View {
         }
         .navigationTitle("Sign Up") // Optional: Add a title for the navigation bar
     }
+    
 }
 
 #Preview {

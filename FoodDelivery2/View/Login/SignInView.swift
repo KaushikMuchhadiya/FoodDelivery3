@@ -1,116 +1,165 @@
-
 import SwiftUI
+import iPhoneNumberField
 
 struct SignInView: View {
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.presentationMode) var presentationMode
+    @State private var phoneNumber = ""
+    @State private var selectedCountry = Country.india
+    @State private var showCountryPicker = false
+    
     var body: some View {
-        NavigationStack{
-            ZStack{
+        ZStack {
+            // Background Image
+            Image("bottom_bg")
+                .resizable()
+                .scaledToFill()
+                .frame(width: .screenWidth, height: .screenWidth)
+            
+            VStack {
+                // Top Image
                 Image("sign_in_top")
                     .resizable()
                     .scaledToFill()
                     .frame(width: .screenWidth, height: .screenWidth)
-                    .padding(.bottom,500)
                 Spacer()
-                VStack{
-                    
-                    
-                    
-                    Text("Get your grocerie \nwith nectar")
+            }
+            
+            // Main Scroll View
+            ScrollView {
+                VStack {
+                    // Title
+                    Text("Get your groceries \nwith nectar")
                         .font(.customfont(.semibold, fontSize: 26))
-                        .foregroundColor(.black)
+                        .foregroundColor(.primaryText)
                         .multilineTextAlignment(.leading)
-                        .padding(.trailing, 110)
-                        .padding(.bottom, 10)
+                        .padding(.top, 350)
+                        .padding(.trailing, 130)
+                        .padding(.bottom, 25)
                     
+                    // Country and Phone Number Input
+                    HStack(spacing: 12) {
+                        Button(action: {
+                            showCountryPicker = true
+                        }) {
+                            HStack(spacing: 4) {
+                                Text(selectedCountry.flag)
+                                    .font(.system(size: 22))
+                                Text(selectedCountry.dialCode)
+                                    .font(.system(size: 18))
+                                    .foregroundColor(.black)
+                            }
+                            .frame(width: 100)
+                            .padding(.leading, -20)
+                        }
+                        .sheet(isPresented: $showCountryPicker) {
+                            NavigationView {
+                                CountryPickerView(selectedCountry: $selectedCountry)
+                                    .navigationTitle("Select Country")
+                                    .navigationBarTitleDisplayMode(.inline)
+                            }
+                        }
+                        
+                        iPhoneNumberField("Enter phone number", text: $phoneNumber)
+                            .flagHidden(true)
+                            .flagSelectable(false)
+                            .formatted(true)
+                            .font(UIFont(size: 16, weight: .regular))
+                    }
+                    .padding(.horizontal, 24)
+                    
+                    // Divider Line
                     Rectangle()
                         .frame(height: 1)
                         .foregroundColor(.gray.opacity(0.3))
                         .padding(.horizontal, 30)
-                        .padding(.top, 60)
-                }
-                
-                Spacer()
-                HStack{
-                    NavigationLink{
+                        .padding(.bottom, 25)
+                    
+                    // Continue with SignIn Button
+                    NavigationLink {
                         LoginView()
                     } label: {
                         Text("Continue with SignIn")
                             .font(.customfont(.semibold, fontSize: 18))
-                            .foregroundColor(.black)
+                            .foregroundColor(.white)
                             .multilineTextAlignment(.center)
-                            .frame( minWidth: 0, maxWidth: .infinity, minHeight: 60, maxHeight: 50 )
+                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 60, maxHeight: 60)
                             .background(Color(hex: "5383EC"))
                             .cornerRadius(20)
                     }
-                    .padding(.horizontal, 1)
-                    .padding(.top, 280)
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 5)
                     
-                }
-                NavigationLink{
-                    SingUpView()
-                } label: {
-                    Text("Continue with SignUp")
-                        .font(.customfont(.semibold, fontSize: 18))
-                        .foregroundColor(.black)
-                        .multilineTextAlignment(.center)
-                        .frame( minWidth: 0, maxWidth: .infinity, minHeight: 60, maxHeight: 50 )
-                        .background(Color(hex: "53B175"))
-                        .cornerRadius(20)
-                }
-                .padding(.top, 430)
-                Divider()
-                    .frame(width: 350)
-                    .padding(.top, 530)
-                
-                VStack{
-                    Text("Or connect with social media")
-                        .font(.customfont(.semibold, fontSize: 15))
-                        .foregroundColor(.textTitle)
-                        .multilineTextAlignment(.center)
-                        .padding(.top,30)
-                        .padding(.bottom,15)
-                }
-                .padding(.top,570)
-                HStack{
+                    // Continue with SignUp Button
+                    NavigationLink {
+                        SignUpView()
+                    } label: {
+                        Text("Continue with SignUp")
+                            .font(.customfont(.semibold, fontSize: 18))
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
+                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 60, maxHeight: 60)
+                            .background(Color.primaryApp)
+                            .cornerRadius(20)
+                    }
+                    .padding(.horizontal, 20)
                     
-                    Image("google")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 40,height:40)
-                        .padding(.trailing,130)
+                    // Divider
+                    Divider()
+                        .frame(width: 350)
+                    
+                    // Social Media Connect
+                    VStack {
+                        Text("or connect with social media")
+                            .font(.customfont(.semibold, fontSize: 16))
+                            .foregroundColor(.textTitle)
+                            .multilineTextAlignment(.center)
+                            .padding(.top, 30)
+                            .padding(.bottom, 15)
+                        
+                        HStack {
+                            Image("google")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 40, height: 40)
+                                .padding(.trailing, 5)
+                            Image("facebook")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 40, height: 40)
+                                .padding(.trailing, 5)
+                            Image("apple_logo")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 42, height: 42)
+                        }
+                    }
                 }
-                        .padding(.top,680)
-                HStack{
-                    
-                    Image("facebook")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 40,height:40)
-                        .padding(.leading,2)
-
-                }       .padding(.top,680)
-
-                
-                
-                Image("apple_logo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 40,height:40)
-                    .padding(.leading,120)
-                    .padding(.top,680)
-                    
-
+                .padding(.top, 50)
             }
-                
-            }
-            .navigationTitle("")
-            .ignoresSafeArea()
-            .navigationBarHidden(true)
-            .navigationBarBackButtonHidden(true)
             
+            // Back Button
+            VStack {
+                HStack {
+                    BackButton {
+                        WelcomeView()
+                    }
+                    Spacer()
+                }
+                Spacer()
+            }
+            .padding(.top, 60)
+            .padding(.horizontal, 20)
         }
+        .navigationTitle("")
+        .ignoresSafeArea()
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
     }
-    
-    #Preview {
+}
+
+#Preview {
+    NavigationStack {
         SignInView()
     }
+}
