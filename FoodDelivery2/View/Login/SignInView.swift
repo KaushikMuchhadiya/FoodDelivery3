@@ -92,7 +92,7 @@ struct SignInView: View {
                     
                     // Continue with SignUp Button
                     NavigationLink {
-                        SignUpView()
+                        SingUpView()
                     } label: {
                         Text("Continue with SignUp")
                             .font(.customfont(.semibold, fontSize: 18))

@@ -108,8 +108,22 @@ struct LoginView: View {
                     
                     Spacer() // Push content up if there's extra space
                 }
+                VStack {
+                    HStack {
+                        BackButton {
+                            SignInView()
+                        }
+                        Spacer()
+                    }
+                    Spacer()
+                }
+                .padding(.top, 60)
+                .padding(.horizontal, 20)
+            
+            
             }
             .navigationBarHidden(true) // Hide the navigation bar on this view
+            .navigationBarBackButtonHidden(true) // Remove the back button
         }
     }
 }
