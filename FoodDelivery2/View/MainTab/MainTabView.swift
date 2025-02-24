@@ -2,7 +2,8 @@ import SwiftUI
 
 struct MainTabView: View {
     var body: some View {
-        ZStack{
+        ZStack(alignment: .bottom){
+            
             HStack{
                 TabButton(title: "Shop", icon: "storefront", isSelect: true) {
                     print("Shop tapped")
